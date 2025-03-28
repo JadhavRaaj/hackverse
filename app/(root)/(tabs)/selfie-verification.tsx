@@ -14,6 +14,7 @@ const SelfieVerification = () => {
     const router = useRouter();
 
     useEffect(() => {
+        console.log('SelfieVerification: Student ID from params:', studentId);
         if (!studentId) {
             Alert.alert('Error', 'Student ID not found. Please log in again.');
             router.push('/login');
@@ -91,7 +92,10 @@ const SelfieVerification = () => {
                 }
 
                 Alert.alert('Success', 'Attendance marked!');
-                router.push('/(root)/(tabs)/AttendanceMenu')
+                router.push({
+                    pathname: '/(root)/(tabs)/AttendanceMenu',
+                    params: { studentId: studentId }, // Pass studentId here!
+                });
             } else {
                 Alert.alert('Failed', 'Faces do not match.');
             }

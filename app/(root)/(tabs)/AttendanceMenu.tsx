@@ -1,16 +1,27 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 
 const AttendanceMenu = () => {
     const router = useRouter();
+    const { studentId } = useLocalSearchParams(); // Access studentId from params
+
+    console.log('AttendanceMenu: Student ID from params:', studentId); // Added log
 
     const navigateToQRCodeGenerator = () => {
-        router.push('/(root)/(tabs)/QRCodeGenerator')
+        router.push('/(root)/(tabs)/QRCodeGenerator');
     };
 
     const navigateToQRCodeScanner = () => {
-        router.push('/(root)/(tabs)/QRCodeScanner');
+        if (!studentId) {
+            console.error('AttendanceMenu: Student ID is not available.');
+            return;
+        }
+
+        router.push({
+            pathname: '/(root)/(tabs)/QRCodeScanner',
+            params: { studentId: studentId },
+        });
     };
 
     return (

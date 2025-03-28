@@ -9,6 +9,9 @@ const QRCodeScanner = () => {
     const { studentId } = useLocalSearchParams();
     const router = useRouter();
 
+
+    console.log('QRCodeScanner: Student ID from params:', studentId);
+
     const handleQRCodeScanned = async (data: string) => {
         if (scanned) return;
         setScanned(true);
@@ -21,7 +24,7 @@ const QRCodeScanner = () => {
         try {
             const { error: qrAttendanceError } = await supabase
                 .from('qr_attendance')
-                .insert([{ studentId: studentId, classId: data }]);
+                .insert([{ studentId: studentId }]);
 
             if (qrAttendanceError) {
                 console.error('QR attendance insert error:', qrAttendanceError);
