@@ -91,7 +91,7 @@ const SelfieVerification = () => {
                 }
 
                 Alert.alert('Success', 'Attendance marked!');
-                router.push('/(root)/(tabs)/home');
+                router.push('/(root)/(tabs)/AttendanceMenu')
             } else {
                 Alert.alert('Failed', 'Faces do not match.');
             }
